@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FinTribe</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Decorative Images -->
+  <div class="masai-left">
+    <img id="masai-left-img" src="masai-left-1.png" alt="Masai Left" />
+  </div>
+  <div class="masai-right">
+    <img id="masai-right-img" src="masai-right-1.png" alt="Masai Right" />
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    
+    <!-- Auth Section -->
+    <div id="auth-section">
+      <h1 class="title">FinTribe</h1>
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" required />
+
+      <button onclick="login()">Login</button>
+      <button onclick="signup()">Signup</button>
+    </div>
+
+    <!-- User Dashboard -->
+    <div id="dashboard" style="display: none;">
+      <h2>You're in the digital nomad domain. Welcome to FinTribe, <span id="user-email"></span>!</h2>
+
+      <p><strong>Total Deposited:</strong> <span id="total-deposits">0.00</span> USDT</p>
+      <p><strong>Estimated Returns:</strong> <span id="daily-returns">0.00</span> USDT</p>
+
+      <h3>Deposit USDT (TRC20)</h3>
+      <p><strong>Send USDT to:</strong> <span id="deposit-address">TH9YqYXoGwL5eh6nCxCDRXvCUgjpKqMPkJ</span></p>
+
+      <label for="user-wallet">Your Tron Wallet Address</label>
+      <input type="text" id="user-wallet" placeholder="e.g. TJXh...something" />
+
+      <label for="deposit-amount">Amount Sent (USDT)</label>
+      <input type="number" id="deposit-amount" placeholder="e.g. 105" />
+
+      <button onclick="submitDeposit()">I Have Deposited</button>
+      <button onclick="registerWallet()">Register Wallet</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" style="display: none;">
+      <h2>Admin Panel</h2>
+      <p><strong>Total USDT Received:</strong> <span id="analytics-usdt">0.00</span></p>
+      <p><strong>Total Users:</strong> <span id="analytics-users">0</span></p>
+
+      <h3>User Deposits</h3>
+      <ul id="user-list"></ul>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

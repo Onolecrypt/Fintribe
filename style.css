@@ -1,0 +1,166 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  color: white;
+  background-color: #1f1f1f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+}
+
+/* Maasai Images (Hidden on small screens) */
+.masai-left,
+.masai-right {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 580px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  transition: filter 0.3s ease-in-out;
+}
+
+.masai-left {
+  left: 0;
+}
+
+.masai-right {
+  right: 0;
+}
+
+.masai-left img,
+.masai-right img {
+  max-height: 90vh;
+  width: auto;
+}
+
+.masai-left img:hover,
+.masai-right img:hover{
+  filter: drop-shadow(0 0 20px rgba(0, 255, 255, 1));
+}
+
+/* Main Content Container */
+.container {
+  background: #1f1f1f02;
+  border-radius: 10px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  z-index: 1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: auto;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  color: white;
+}
+p {
+  margin-bottom: 1rem;
+  color: /*#9ca3af;*/ rgba(0, 255, 255, 1);
+}
+label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  color:rgba(0, 255, 255, 1);
+}
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color:white;
+  text-align: center;
+}
+input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #1f2937;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+button + button {
+  margin-top: 0.5rem;
+}
+
+button:hover {
+   box-shadow: 
+    -10px 0 15px rgba(0, 255, 255, 0.6),  /* Left glow */
+    10px 0 15px rgba(0, 255, 255, 0.6);   /* Right glow */
+  background-color: rgba(0, 255, 255, 1);
+  color: #1f2937;
+}
+
+
+.stats {
+  margin: 1rem 0;
+  color: #111827;
+  font-size: 1rem;
+}
+
+ul#user-list {
+  list-style-type: none;
+  margin-top: 1rem;
+}
+
+ul#user-list li {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  label,
+  input,
+  button,
+  p,
+  .stats {
+    font-size: 1rem;
+  }
+
+  .masai-left,
+  .masai-right {
+    display: none;
+  }
+}
+
+ #user-email {
+  
+  color:rgba(0, 255, 255, 1);
+ }
