@@ -4,6 +4,32 @@ const supabaseClient = supabase.createClient(
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVsYnFwd2FzeWV3d2hubnpqcmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1NDUwNTksImV4cCI6MjA2NDEyMTA1OX0.Z-4k4ltlUYtt9BAk5c7Y1cTKrdtY4pbgWqHxAzdB6s4'
 );
 
+// Handle email confirmation redirect and restore session
+async function handleEmailConfirmationRedirect() {
+  const hash = window.location.hash;
+  if (hash && hash.includes("access_token")) {
+    const params = new URLSearchParams(hash.substring(1));
+    const access_token = params.get("access_token");
+    const refresh_token = params.get("refresh_token");
+
+    if (access_token && refresh_token) {
+      const { data, error } = await supabaseClient.auth.setSession({
+        access_token,
+        refresh_token,
+      });
+
+      if (error) {
+        console.error("Error restoring session:", error.message);
+      } else {
+        console.log("Session restored from email confirmation link:", data);
+        window.location.hash = ""; // clean up URL
+        location.reload(); // refresh to trigger dashboard load
+      }
+    }
+  }
+}
+
+handleEmailConfirmationRedirect();
 
 // Constants
 const ADMIN_EMAILS = ['kingtailan40@gmail.com'];
@@ -47,7 +73,6 @@ async function signup(event) {
   alert("Signup successful. Please verify your email before logging in.");
 }
 
-
 async function logout() {
   await supabaseClient.auth.signOut();
   currentUser = null;
@@ -89,7 +114,7 @@ async function loadDashboard() {
   });
 
   document.getElementById("total-deposits").textContent = totalDeposits.toFixed(2);
-  document.getElementById("daily-returns").textContent =(totalDeposits + totalInterest).toFixed(2) ;
+  document.getElementById("daily-returns").textContent = (totalDeposits + totalInterest).toFixed(2);
 
   if (checkAdmin(currentUser.email)) {
     document.getElementById("admin-dashboard").style.display = "block";
@@ -184,7 +209,6 @@ async function loadUserList() {
   document.getElementById("analytics-usdt").textContent = totalUSDT.toFixed(2);
   document.getElementById("analytics-users").textContent = summaries.length;
 }
-
 
 // Background Image Rotation
 const leftImages = [
