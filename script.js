@@ -27,15 +27,26 @@ async function login() {
   loadDashboard();
 }
 
-async function signup() {
+async function signup(event) {
+  event.preventDefault();
+
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
 
-  const { error } = await supabaseClient.auth.signUp({ email, password });
-  if (error) return alert(error.message);
+  if (!email || !password) {
+    return alert("Email and password are required.");
+  }
+
+  const { data, error } = await supabaseClient.auth.signUp({ email, password });
+
+  if (error) {
+    console.error("Signup error:", error);
+    return alert(error.message);
+  }
 
   alert("Signup successful. Please verify your email before logging in.");
 }
+
 
 async function logout() {
   await supabaseClient.auth.signOut();
@@ -74,10 +85,11 @@ async function loadDashboard() {
     const days = Math.floor((new Date() - new Date(deposit_date)) / (1000 * 60 * 60 * 24));
     totalDeposits += amount;
     totalInterest += amount * DAILY_INTEREST_RATE * days;
+    console.log(days);
   });
 
   document.getElementById("total-deposits").textContent = totalDeposits.toFixed(2);
-  document.getElementById("daily-returns").textContent = (totalDeposits + totalInterest).toFixed(2);
+  document.getElementById("daily-returns").textContent =(totalDeposits + totalInterest).toFixed(2) ;
 
   if (checkAdmin(currentUser.email)) {
     document.getElementById("admin-dashboard").style.display = "block";
